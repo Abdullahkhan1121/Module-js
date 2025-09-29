@@ -4,14 +4,14 @@ import Product from '../models/productModel.mjs';
 // const data = JSON.parse(fs.readFileSync("data.json","utf-8"));
 // let products = data.products;
 
-let index = (req,res) =>{
-    try {
-        res.status(200).json({message:"Products Found",Product:products })
-      } 
-      catch (error) {
-        res.status(404).json({message:"Products Not Found" })
-      }
-}
+// let index = (req,res) =>{
+//     try {
+//         res.status(200).json({message:"Products Found",Product:products })
+//       } 
+//       catch (error) {
+//         res.status(404).json({message:"Products Not Found" })
+//       }
+// }
 
 // let singleProduct =(req, res) => {
 //     try {
@@ -102,13 +102,31 @@ let addProduct = async (req,res) =>{
     }
 }
 
+// Show Products
+let index = async (req,res) =>{
+  try {
+    let products = await Product.find();
+    if (products) {
+      res.status(200).json({message:"Showing All Products",Products:products });
+    } else {
+      res.status(400).json({ message: "Could not show any Products" });
+    }
+      
+    } 
+    catch (error) {
+      res.status(500).json({message:"Error" })
+    }
+}
+
+
 
 const productController= {
-    index,
+    // index,
     // singleProduct,
     // addProduct,
     // deleteProduct
-    addProduct
+    addProduct,
+    index
  }
 
 
