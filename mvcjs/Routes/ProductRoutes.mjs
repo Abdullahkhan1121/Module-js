@@ -5,9 +5,11 @@ const productRouter= express.Router();
 
 productRouter
 .get("/",productController.index)
-.get("/:id",productController.singleProduct)
+// .get("/:id",productController.singleProduct)
+// .post("/add",productController.addProduct)
+// .delete("/delete",productController.deleteProduct)
+// Work
 .post("/add",productController.addProduct)
-.delete("/delete",productController.deleteProduct)
 
 
 export default productRouter;
