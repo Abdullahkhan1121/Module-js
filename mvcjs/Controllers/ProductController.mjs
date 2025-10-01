@@ -118,7 +118,94 @@ let index = async (req,res) =>{
     }
 }
 
+// Fetch product by Id
+let singleProduct = async (req,res) =>{
+  try {
+    let id= req.params.id;
+    let product = await Product.findOne({_id:id});
+    if (product) {
+      res.status(200).json({message:"Showing Product by Id",Product:product});
+    } else {
+      res.status(400).json({ message: "Could not show any Products" });
+    }
+      
+    } 
+    catch (error) {
+      res.status(500).json({message:"Error" })
+    }
+}
 
+// Fetch product by Brand
+let productByBrand = async (req,res) =>{
+  try {
+    let brand= req.params.brand;
+    let products = await Product.find({brand:brand});
+    if (products.length > 0) {
+      res.status(200).json({message:`Showing Product of ${brand}`,Product:products});
+    } else {
+      res.status(400).json({ message: "Could not show any Products" });
+    }
+      
+    } 
+    catch (error) {
+      res.status(500).json({message:"Error" })
+    }
+}
+
+// Delete Product
+let deleteProduct = async (req,res) =>{
+  try {
+    let id= req.params.id;
+    let delProduct = await Product.deleteOne(id);
+    if (delProduct) {
+      res.status(200).json({message:"Showing Product by Id",Product:delProduct});
+    } else {
+      res.status(400).json({ message: "Could not show any Products" });
+    }
+      
+    } 
+    catch (error) {
+      res.status(500).json({message:"Error" })
+    }
+}
+
+// Edit Product
+let editProduct = async (req,res) =>{
+  try {
+    let id= req.params.id;
+    let prod = await Product.findOne(id);
+    if (prod) {
+    const product = req.body;
+    let updatedProduct = new Product(
+      {
+        _id:id,
+        title:product.title,
+        description:product.description,
+        price:product.price,
+        discountPercentage:product.discountPercentage,
+        rating:product.rating,
+        stock:product.stock,
+        brand:product.brand,
+        category:product.category,
+        images:product.images,
+      }
+    )
+
+    let updateprod = await Product.updateOne({_id:id},updatedProduct);
+    if (updateprod) {
+      res.status(200).json({message:"Product Updated",product:updateprod });
+    } else {
+      res.status(400).json({ message: "Product could not be updated" });
+    }
+    } else {
+      res.status(400).json({ message: "Product could not be updated" });
+    }
+
+    } 
+    catch (error) {
+      res.status(500).json({message:"Error"})
+    }
+}
 
 const productController= {
     // index,
@@ -126,7 +213,11 @@ const productController= {
     // addProduct,
     // deleteProduct
     addProduct,
-    index
+    index,
+    singleProduct,
+    productByBrand,
+    deleteProduct,
+    editProduct
  }
 
 
