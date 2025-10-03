@@ -1,6 +1,7 @@
 import express from 'express'
 import productRouter from './Routes/ProductRoutes.mjs'
 import mongoose from 'mongoose'
+import userRouter from './Routes/UserRoutes.mjs'
 
 const app = express()
 const port = 3000
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/product",productRouter)
+app.use("/user",userRouter)
 
 
 app.listen(port, () => {

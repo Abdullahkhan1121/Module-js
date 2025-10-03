@@ -156,11 +156,11 @@ let productByBrand = async (req,res) =>{
 let deleteProduct = async (req,res) =>{
   try {
     let id= req.params.id;
-    let delProduct = await Product.deleteOne(id);
+    let delProduct = await Product.deleteOne({ _id: id });
     if (delProduct) {
-      res.status(200).json({message:"Showing Product by Id",Product:delProduct});
+      res.status(200).json({message:"Showing Deleted Product",Product:delProduct});
     } else {
-      res.status(400).json({ message: "Could not show any Products" });
+      res.status(400).json({ message: "Could not Delete Product" });
     }
       
     } 
@@ -173,7 +173,7 @@ let deleteProduct = async (req,res) =>{
 let editProduct = async (req,res) =>{
   try {
     let id= req.params.id;
-    let prod = await Product.findOne(id);
+    let prod = await Product.findOne({ _id: id });
     if (prod) {
     const product = req.body;
     let updatedProduct = new Product(
