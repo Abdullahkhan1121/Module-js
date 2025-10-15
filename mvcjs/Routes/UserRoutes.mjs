@@ -7,18 +7,15 @@ userRouter
 
 // Get
 .get("/",userController.index)
-.get("/:id",userController.singleUser)
 
 // Post
-.post("/add",userController.addUser)
+.post("/signup",userController.Signup)
+.post("/login",userController.Login)
 
 // Delete
-.delete("/:id",userController.deleteUser)
+// .delete("/:id",userController.deleteUser)
 
-// Put
-.put("/:id",userController.editUser)
 
-//Patch
 
 
 export default userRouter;
