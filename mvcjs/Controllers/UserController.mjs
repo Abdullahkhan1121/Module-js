@@ -1,6 +1,8 @@
 
 import User from '../models/userModel.mjs';
 import  bcrypt  from "bcrypt"
+import dotenv from 'dotenv'
+dotenv.config()
 
 // fetch all products
 let index =async (req, res) => {
@@ -68,10 +70,9 @@ let Login = async (req, res) =>{
     console.log(checkUser)
     
     if (checkPassword) {
-      const token= await jwt.sign({checkUser}, process.env.jwt_secret,{expiresIn: '1h'});
+      const token= await jwt.sign({checkUser}, process.env.JWT_SECRET,{expiresIn: '1h'});
       console.log(token);
       res.status(200).json({message:"login success....!", user:checkUser,token:token});
-
       
     } else {
       res.status(401).json({message:"Invalid credentials "});
