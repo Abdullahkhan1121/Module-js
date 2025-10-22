@@ -10,5 +10,6 @@ userRoutes
 .post("/SignUp/",UserController.SignUp)
 .post("/Login/",UserController.Login)
 .delete("/:id",UserController.DeleteUser)
+.post("/sendEmail",UserController.sendEmail)
 
 export default userRoutes;

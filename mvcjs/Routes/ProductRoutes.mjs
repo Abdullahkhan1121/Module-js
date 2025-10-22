@@ -1,8 +1,8 @@
 import express from 'express'
 import productController from '../Controllers/ProductController.mjs';
-import { upload } from '../cloudinaryConfig.mjs';
-import auth from '../controllers/middlewares/auth.mjs';
-import AdminAuth from '../controllers/middlewares/adminAuth.mjs';
+import { upload } from '../cloudinarConfig.mjs';
+import auth from '../middleware/auth.mjs';
+import AdminAuth from '../middleware/adminAuth.mjs';
 
 const productRouter= express.Router();
 

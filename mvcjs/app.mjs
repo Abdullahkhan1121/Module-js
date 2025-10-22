@@ -3,11 +3,15 @@ import productRouter from './Routes/ProductRoutes.mjs'
 import mongoose from 'mongoose'
 import userRouter from './Routes/UserRoutes.mjs'
 import dotenv from 'dotenv'
+import cors from 'cors'
 dotenv.config()
 
 const app = express()
 const port = process.env.PORT
+
+//middlewares
 app.use(express.json())
+app.use(cors())
 
 main().catch(err => console.log(err));
 
@@ -22,6 +26,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+
+//Routers
 app.use("/product",productRouter)
 app.use("/user",userRouter)
 

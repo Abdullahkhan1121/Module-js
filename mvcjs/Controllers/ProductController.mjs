@@ -1,7 +1,7 @@
 import fs from  'node:fs';
 import { title } from 'node:process';
 import Product from '../models/productModel.mjs';
-import Users from '../models/usersModel.mjs';
+import Users from '../models/userModel.mjs';
 
 
 let index = async(req, res) => {
