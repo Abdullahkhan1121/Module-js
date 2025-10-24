@@ -10,6 +10,12 @@ const productRouter= express.Router();
 // productRouter.get("route",function)
 productRouter
 // .get("/",productController.index)
+
+.get("/user/:id",productController.singleUser)
+.delete("/deleteUsers/:id",productController.deleteUsers)
+.post("/AddUsers",productController.AddUsers)
+.put("/UpdateUsers/:id",productController.updateUser)
+
 .get("/:id",productController.singleProduct)
 .delete("/deleteproduct/:id",productController.deleteproduct)
 .post("/AddProduct/" , AdminAuth,productController.AddProduct)
@@ -17,11 +23,9 @@ productRouter
 
 
 
-.get("/",auth,productController.index)
-.get("/user/:id",productController.singleUser)
-.delete("/deleteUsers/:id",productController.deleteUsers)
-.post("/AddUsers",productController.AddUsers)
-.put("/UpdateUsers/:id",productController.updateUser)
+
+// .get("/",auth,productController.index)
+.get("/",productController.index)
 
 .post("/AddProductImage", upload.array("image") ,productController.AddProductImage)
 

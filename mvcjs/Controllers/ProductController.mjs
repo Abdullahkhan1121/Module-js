@@ -6,9 +6,9 @@ import Users from '../models/userModel.mjs';
 
 let index = async(req, res) => {
   try {
-   let user = await Users.find();
-    if (user) {
-     res.status(200).json({message:"All Users!",user:user});
+   let products = await Product.find();
+    if (products) {
+     res.status(200).json({message:"All Product!",products:products});
    } else {
      res.status(404).json({message:"No User found"});
    }
