@@ -18,81 +18,6 @@ let index = async(req, res) => {
  }
 }
 
-
-let singleUser  = async(req, res) => {
-  try {
-      const id= req.params.id;
-      let user = await Users.findById(id);
-      if (user) {
-          res.status(200).json({message:"User found",user});
-      }
-      else {
-          res.status(404).json({message:"Error !"});
-          }
-      } catch (error) {
-          console.log(error);
-          res.status(500).json({message:error.message})
-      }
-}
-
-let AddUsers = async (req, res) => {
-  try {
-      const  user = req.body;
-      let newuser = new Users(
-      {
-          name:user.name,
-          email:user.email,
-          password:user.password
-      }
-      )
-      let addUser = await newuser.save();
-
-      if (addUser) {
-      res.status(200).json({message:"User Added!",user:addUser});
-      } else {
-      res.status(404).json({message:"Error !"});
-      }
-} catch (error) {
-  console.log(error);
-  res.status(500).json({message:error.message})
-}
-}
-
-
-let deleteUsers = async(req, res) => {
-  try {
-
-const id = req.params.id;
-let deleteuser = await Users.findByIdAndDelete(id)
-
-if (deleteuser) {
-res.status(200).json({message:"User has been deleted",deleteuser});
-} else {
-res.status(404).json({message:"No User found"});
-}
-} catch (error) {
-  console.log(error);
-  res.status(500).json({message:error.message})
-}
-}
-
-let updateUser  = async(req, res) => {
-  try {
-const id= req.params.id;
-const updateUser = req.body;
-const updateData = await Users.findByIdAndUpdate(id,updateUser,{new : true, runValidators: true});
-if (updateData) {
-  res.status(200).json({message:"User Updated",updateData});
-  
-} else {
-  res.status(404).json({message:"Error"});
-}
-
-} catch (error) {
-  console.log(error);
-  res.status(500).json({message:error.message})
-}
-}
 let singleProduct  = async(req, res) => {
   try {
 const id= req.params.id;
@@ -218,10 +143,6 @@ const productController= {
     singleProduct,
     deleteproduct,
     updateProduct,
-    AddUsers,
-    singleUser,
-    deleteUsers,
-    updateUser,
     AddProductImage
 
  }

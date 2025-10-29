@@ -11,18 +11,10 @@ const productRouter= express.Router();
 productRouter
 // .get("/",productController.index)
 
-.get("/user/:id",productController.singleUser)
-.delete("/deleteUsers/:id",productController.deleteUsers)
-.post("/AddUsers",productController.AddUsers)
-.put("/UpdateUsers/:id",productController.updateUser)
-
 .get("/:id",productController.singleProduct)
 .delete("/deleteproduct/:id",productController.deleteproduct)
 .post("/AddProduct/" , AdminAuth,productController.AddProduct)
 .put("/UpdateProduct/:id",productController.updateProduct)
-
-
-
 
 // .get("/",auth,productController.index)
 .get("/",productController.index)

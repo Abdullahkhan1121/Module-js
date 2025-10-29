@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     email: '',
     password: ''
   });
+
+  const navigate= useNavigate()
 
   const [errors, setErrors] = useState({});
 
@@ -20,8 +24,8 @@ const Signup = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+    if (!formData.username.trim()) {
+      newErrors.username = 'Username is required';
     }
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -37,15 +41,28 @@ const Signup = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
       setErrors({});
-      alert('Signup Successful! 🎉');
-      console.log('Form Data:', formData);
+
+      //Api call to signup
+
+      let register= await axios.post('http://localhost:3000/user/SignUp', formData);
+      if(register.data.msg){
+        console.log(register.data.msg);
+        alert(register.data.msg);
+        console.log('Form Data:', formData);
+        navigate('/login'); // Redirect to login page after successful signup
+      }else{
+        alert("failed to register user right now..!");
+
+      }
+      // alert('Signup Successful! 🎉');
+      // console.log('Form Data:', formData);
     }
   };
 
@@ -67,13 +84,13 @@ const Signup = () => {
                   <span className="input-group-text bg-white"><FaUser /></span>
                   <input 
                     type="text" 
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`} 
-                    name="name" 
-                    value={formData.name}
+                    className={`form-control ${errors.username ? 'is-invalid' : ''}`} 
+                    name="username" 
+                    value={formData.username}
                     onChange={handleChange}
-                    placeholder="Enter your name"
+                    placeholder="Enter your username"
                   />
-                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                  {errors.username && <div className="invalid-feedback">{errors.username}</div>}
                 </div>
               </div>
 
